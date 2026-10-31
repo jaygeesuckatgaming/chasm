@@ -1,3 +1,5 @@
+This Fork is using my AI System - > https://github.com/jaygeesuckatgaming/Gem-System-v2
+
 # chasm — Agentic NPC Engine
 
 > A local-first, **game-agnostic** AI backend for agentic game characters. They talk, they listen, they **remember what they personally saw** — and they **act** in the world on their own. Bring any game (or build a new one) and connect it to chasm.
