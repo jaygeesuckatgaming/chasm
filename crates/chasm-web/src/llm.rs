@@ -90,6 +90,9 @@ pub struct LlmTarget {
     /// True for the managed-local llama.cpp runtime (no auth, model auto-resolved,
     /// strict json_schema honoured, warm-up meaningful).
     pub local: bool,
+    /// A hosted OpenAI-compatible server that honours the strict `json_schema`
+    /// response format (Ollama, vLLM, ...). Set from `llm.force_json_schema`.
+    pub force_json_schema: bool,
 }
 
 impl LlmTarget {
@@ -103,6 +106,7 @@ impl LlmTarget {
             label: "llama.cpp".to_string(),
             routing: String::new(),
             local: true,
+            force_json_schema: true,
         }
     }
 
@@ -136,6 +140,7 @@ impl LlmTarget {
             label: def.name.to_string(),
             routing,
             local: false,
+            force_json_schema: settings.llm.force_json_schema,
         }
     }
 
@@ -154,7 +159,7 @@ impl LlmTarget {
     /// Only the local llama.cpp does; hosted OpenAI-compatible servers vary, so
     /// they get plain JSON mode instead (the prompt carries the field contract).
     fn honours_json_schema(&self) -> bool {
-        self.local
+        self.local || self.force_json_schema
     }
 }
 
@@ -785,7 +790,17 @@ async fn openai_compat_stream(
             .cloned();
         request_body_sampled(model.as_deref(), messages, true, format.as_ref(), sampling)
     } else {
-        hosted_request_body(model.as_deref().unwrap_or_default(), messages, true, sampling)
+        let mut body = hosted_request_body(model.as_deref().unwrap_or_default(), messages, true, sampling);
+        // Hosted compat servers get JSON mode by default; one that honours the
+        // strict schema (Ollama, vLLM, ...) gets chasm's exact NPC shape instead.
+        if response_format.is_some() {
+            body["response_format"] = if target.honours_json_schema() {
+                response_format.cloned().unwrap_or_else(|| json!({ "type": "json_object" }))
+            } else {
+                json!({ "type": "json_object" })
+            };
+        }
+        body
     };
     apply_openrouter_routing(&mut body, target);
     // Ask the server to include the final `usage`/`timings` chunk in the stream so
@@ -920,7 +935,15 @@ async fn openai_compat_capturing(
             .cloned();
         request_body_sampled(model.as_deref(), messages, false, format.as_ref(), sampling)
     } else {
-        hosted_request_body(model.as_deref().unwrap_or_default(), messages, false, sampling)
+        let mut body = hosted_request_body(model.as_deref().unwrap_or_default(), messages, false, sampling);
+        if response_format.is_some() {
+            body["response_format"] = if target.honours_json_schema() {
+                response_format.cloned().unwrap_or_else(|| json!({ "type": "json_object" }))
+            } else {
+                json!({ "type": "json_object" })
+            };
+        }
+        body
     };
     apply_openrouter_routing(&mut body, target);
     let mut request = apply_provider_headers(client.post(&url).json(&body), target);
@@ -1412,6 +1435,7 @@ mod tests {
             label: "OpenRouter".to_string(),
             routing: routing.to_string(),
             local: false,
+            force_json_schema: false,
         };
         // speed (and the empty/default) → throughput
         let mut b = json!({ "model": "m" });

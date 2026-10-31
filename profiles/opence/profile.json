@@ -1,0 +1,13 @@
+{
+  "id": "opence",
+  "name": "OpenCE — Halo: Combat Evolved",
+  "description": "Campaign NPCs for Halo: Combat Evolved, played through the OpenCE source port. UNSC and Covenant archetypes driven by the native OpenCE chasm bridge.",
+  "comment": "Character names match characters/<name>.png. The bridge maps Halo actor types to these character ids and sends characterId explicitly on each turn.",
+  "characters": [
+    { "name": "UNSC Marine", "edid": "marine" },
+    { "name": "Grunt", "edid": "grunt" },
+    { "name": "Elite", "edid": "elite" },
+    { "name": "Jackal", "edid": "jackal" },
+    { "name": "Hunter", "edid": "hunter" }
+  ]
+}

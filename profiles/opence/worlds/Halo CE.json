@@ -1,0 +1,59 @@
+{
+  "name": "Halo CE",
+  "entries": {
+    "0": {
+      "key": ["Installation 04", "the ring", "Halo", "ringworld"],
+      "comment": "Installation 04",
+      "content": "Installation 04 is a ringworld built by the Forerunners, about ten thousand kilometres across. Its inner surface holds forests, canyons, beaches, and Forerunner structures under a thin atmosphere. The ring was built to contain and study the Flood, and it has a single Monitor, 343 Guilty Spark.",
+      "constant": false,
+      "disable": false,
+      "order": 100,
+      "caseSensitive": false
+    },
+    "1": {
+      "key": ["Covenant", "Elites", "Grunts", "Jackals", "Hunters", "Prophets"],
+      "comment": "The Covenant",
+      "content": "The Covenant is a theocratic alliance of alien species — Sangheili (Elites), Unggoy (Grunts), Kig-Yar (Jackals), Lekgolo (Hunters), and others — led by the Prophets. They believe the Forerunners' artifacts are sacred and that activating them will begin a Great Journey. Humans are declared heretics and are to be exterminated.",
+      "constant": false,
+      "disable": false,
+      "order": 100,
+      "caseSensitive": false
+    },
+    "2": {
+      "key": ["Flood", "infection form", "parasite", "combat form"],
+      "comment": "The Flood",
+      "content": "The Flood is a parasitic life form that consumes and reanimates hosts. Infection forms swarm and burrow; combat forms are twisted bodies of former Marines, Elites, and Grunts. The Flood spreads through spores and biomass, and the ring was built to contain it. It does not negotiate.",
+      "constant": false,
+      "disable": false,
+      "order": 100,
+      "caseSensitive": false
+    },
+    "3": {
+      "key": ["UNSC", "Pillar of Autumn", "Marines", "human"],
+      "comment": "UNSC and the Pillar of Autumn",
+      "content": "The UNSC is humanity's military arm. The Pillar of Autumn, a Halcyon-class cruiser under Captain Jacob Keyes, fled the fall of Reach and was forced down on Installation 04. Its surviving Marines, ODSTs, and crew fight a losing war against the Covenant while trying to contain what the ring holds.",
+      "constant": false,
+      "disable": false,
+      "order": 100,
+      "caseSensitive": false
+    },
+    "4": {
+      "key": ["Master Chief", "Chief", "Spartan", "Spartan-117", "John"],
+      "comment": "The Master Chief",
+      "content": "The Master Chief, Spartan-117, is a UNSC supersoldier in MJOLNIR armour and the last active Spartan of his class. He is quiet, mission-focused, and extremely dangerous. Marines treat him with a mix of awe and relief. Cortana, an AI, rides in his armour.",
+      "constant": false,
+      "disable": false,
+      "order": 100,
+      "caseSensitive": false
+    },
+    "5": {
+      "key": ["343 Guilty Spark", "Monitor", "Guilty Spark", "Forerunner"],
+      "comment": "343 Guilty Spark and the Forerunners",
+      "content": "The Forerunners built the Halo rings and left behind the Monitors that maintain them. 343 Guilty Spark is Installation 04's Monitor: polite, precise, and utterly committed to the ring's purpose, even when that purpose is catastrophic for everyone else.",
+      "constant": false,
+      "disable": false,
+      "order": 100,
+      "caseSensitive": false
+    }
+  }
+}

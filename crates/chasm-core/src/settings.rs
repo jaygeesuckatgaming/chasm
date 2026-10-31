@@ -411,6 +411,11 @@ pub struct LlmSettings {
     /// sent as `response_format`). The model never sees the list — the sampler
     /// steers it onto the nearest legal verb. Off = free verb + embedder snap.
     pub npc_action_enum: bool,
+    /// Send the strict `json_schema` response format to a hosted
+    /// OpenAI-compatible server. Ollama and vLLM honour it and constrain the
+    /// reply to chasm's exact NPC shape; some older compat servers reject the
+    /// field, so this is off unless the user turns it on.
+    pub force_json_schema: bool,
 }
 
 /// Per-request LLM sampling knobs forwarded to the local llama.cpp
@@ -551,6 +556,7 @@ impl Default for LlmSettings {
             orchestrator_temperature: ORCHESTRATOR_DEFAULT_TEMPERATURE,
             orchestrator_system_prompt: ORCHESTRATOR_DEFAULT_SYSTEM_PROMPT.to_string(),
             npc_action_enum: false,
+            force_json_schema: false,
         }
     }
 }

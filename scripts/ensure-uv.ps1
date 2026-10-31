@@ -42,11 +42,11 @@ function Resolve-Uv {
     }
 
     # 3) Per-user bootstrap into %LOCALAPPDATA%\chasm\uv.
-    $home = if ($env:CHASM_HOME) { $env:CHASM_HOME }
+    $chasmHome = if ($env:CHASM_HOME) { $env:CHASM_HOME }
             elseif ($env:LOCALAPPDATA) { Join-Path $env:LOCALAPPDATA 'chasm' }
             elseif ($env:APPDATA) { Join-Path $env:APPDATA 'chasm' }
             else { Join-Path $env:TEMP 'chasm' }
-    $uvHome = Join-Path $home 'uv'
+    $uvHome = Join-Path $chasmHome 'uv'
     $uvExe = Join-Path $uvHome 'uv.exe'
     if (Test-Path $uvExe) {
         & $Log "[uv] using bootstrapped uv ($uvExe)"
